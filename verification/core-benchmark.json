@@ -1,0 +1,52 @@
+{
+  "runtime": "v22.16.0",
+  "platform": "linux",
+  "architecture": "x64",
+  "cpu": "Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz",
+  "method": "Single local run per operation; no cross-machine performance guarantee. Timings include synchronous work only.",
+  "timings": [
+    {
+      "name": "Create 1,000,000 plain model objects",
+      "milliseconds": 833.5061299999999
+    },
+    {
+      "name": "Initialize flat source, columns, row projection (1,000,000 items)",
+      "milliseconds": 2.830857000000151
+    },
+    {
+      "name": "Read 100 dispersed row models without allocating rows",
+      "milliseconds": 0.6059110000001056
+    },
+    {
+      "name": "Realize 40 dispersed core rows",
+      "milliseconds": 0.6473840000001019
+    },
+    {
+      "name": "Initialize 1,000,000-row height index",
+      "milliseconds": 93.99440300000015
+    },
+    {
+      "name": "100,000 variable-height updates",
+      "milliseconds": 42.34881599999994
+    },
+    {
+      "name": "100,000 pixel-to-row + prefix-offset queries",
+      "milliseconds": 97.47676299999989
+    },
+    {
+      "name": "Stable numeric sort + inverse mapping (100,000 rows)",
+      "milliseconds": 188.50574700000016
+    },
+    {
+      "name": "Expand all 10,000 hierarchical rows",
+      "milliseconds": 303.2481650000002
+    },
+    {
+      "name": "Collapse all 10,000 hierarchical rows",
+      "milliseconds": 109.62516499999992
+    }
+  ],
+  "geometryBytes": 16000008,
+  "cachedFlatRows": 40,
+  "checksum": 2079823901936
+}

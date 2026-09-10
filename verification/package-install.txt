@@ -1,0 +1,5 @@
+Local package verification: @treedatagrid/core and @treedatagrid/web 0.1.0
+
+up to date in 923ms
+Installed Core runtime and Web module resolution passed.
+Installed-package typed consumer passed.

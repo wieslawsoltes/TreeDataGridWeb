@@ -1,0 +1,23 @@
+{
+  "version": "0.1.0",
+  "upstreamCommit": "3ca47316d724e5e040ab0281a880e8df999b25fc",
+  "coreTests": {
+    "passed": 34,
+    "failed": 0
+  },
+  "browserGroups": {
+    "passed": 30,
+    "failed": 0
+  },
+  "browser": "144.0.7559.96",
+  "typeScript": "5.8.3",
+  "playwright": "1.57.0",
+  "transport": "Playwright set_content with generated standalone HTML; URL navigation is policy-blocked",
+  "sha256": {
+    "dist/TreeDataGridWeb.html": "8472e6967598b863448fccbc7e1bd2924a537b574efb526ad6ed0f1a9c886f46",
+    "dist/treedatagrid.global.js": "0f7833fad54753fadd2e234839bc4d6d031831efa2783fcdf4f7bbd9c9115bc6",
+    "dist/core-demo.bundle.js": "b729c5d82aaae5bad520372bb87259a6bb14442910c44789878372d4eee33751",
+    "releases/treedatagrid-core-0.1.0.tgz": "641dd50fe7848415219724bde6bfc551426d0d5b433981fa5f5ad3f5404bc9db",
+    "releases/treedatagrid-web-0.1.0.tgz": "751b00881e2bf7496885bc4eb54dc6ee18f6cc6f37f5a3199c0c8f9251edc19c"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@treedatagrid/core",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js"
+    }
+  },
+  "sideEffects": false,
+  "license": "MIT",
+  "description": "TreeDataGrid DOM-independent JavaScript Core models",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "src",
+    "LICENSE",
+    "README.md",
+    "THIRD_PARTY_NOTICES.md"
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "browser": "144.0.7559.96",
+  "transport": "Playwright set_content with generated standalone HTML; URL navigation is policy-blocked",
+  "viewport": {
+    "width": 1440,
+    "height": 980
+  },
+  "passed": 30,
+  "failed": 0,
+  "uncaughtExceptions": [],
+  "tests": [
+    {
+      "name": "All ten showcase views bind Core Model directly and fit the viewport",
+      "passed": true,
+      "milliseconds": 2173.17
+    },
+    {
+      "name": "Pointer expansion writes nested model state and ARIA",
+      "passed": true,
+      "milliseconds": 904.17
+    },
+    {
+      "name": "Pointer ranges, additive row selection, select all and Escape",
+      "passed": true,
+      "milliseconds": 1066.27
+    },
+    {
+      "name": "Rectangular cell selection follows source-column indexes",
+      "passed": true,
+      "milliseconds": 574.02
+    },
+    {
+      "name": "F2 editing, Enter commit, Escape cancel, undo and redo",
+      "passed": true,
+      "milliseconds": 1030.31
+    },
+    {
+      "name": "Numeric conversion and validation retain the editor on failure",
+      "passed": true,
+      "milliseconds": 544.08
+    },
+    {
+      "name": "Arrow, Page, Ctrl+Home/End and type-to-search navigation",
+      "passed": true,
+      "milliseconds": 1064.21
+    },
+    {
+      "name": "Three-state header sorting preserves model selection",
+      "passed": true,
+      "milliseconds": 941.78
+    },
+    {
+      "name": "Column resize with actual pointer input",
+      "passed": true,
+      "milliseconds": 990.35
+    },
+    {
+      "name": "Native header drag reorders source columns",
+      "passed": true,
+      "milliseconds": 617.9
+    },
+    {
+      "name": "Context menu and live column visibility",
+      "passed": true,
+      "milliseconds": 607.77
+    },
+    {
+      "name": "Templates initialize, update, edit and retain three-state checkboxes",
+      "passed": true,
+      "milliseconds": 1262.27
+    },
+    {
+      "name": "TSV round-tripping, transactional paste, undo and safe CSV output",
+      "passed": true,
+      "milliseconds": 367.74
+    },
+    {
+      "name": "Observable add/remove, filtering and empty state",
+      "passed": true,
+      "milliseconds": 1233.79
+    },
+    {
+      "name": "Variable-height distant scrolling remains contiguous and bounded",
+      "passed": true,
+      "milliseconds": 1268.65
+    },
+    {
+      "name": "ResizeObserver tracks live content growth and shrinkage",
+      "passed": true,
+      "milliseconds": 826.49
+    },
+    {
+      "name": "100,000 rows: jump, tail reachability, bounded DOM and recycling",
+      "passed": true,
+      "milliseconds": 4955.27
+    },
+    {
+      "name": "One million rows: scaled scrollbar reaches beyond CSS extent limits",
+      "passed": true,
+      "milliseconds": 2649.23
+    },
+    {
+      "name": "200 columns: horizontal virtualization, pinned cells and header alignment",
+      "passed": true,
+      "milliseconds": 796.35
+    },
+    {
+      "name": "Shared source, direct row identity, independent widths and nested binding",
+      "passed": true,
+      "milliseconds": 638.2
+    },
+    {
+      "name": "Detach suspends bindings; reattach resynchronizes without disposing the model",
+      "passed": true,
+      "milliseconds": 604.19
+    },
+    {
+      "name": "Native row drag moves an item between hierarchical groups",
+      "passed": true,
+      "milliseconds": 618.53
+    },
+    {
+      "name": "Auto width converges instead of feeding back stretched flex widths",
+      "passed": true,
+      "milliseconds": 881.26
+    },
+    {
+      "name": "Serializable view-state save and restoration",
+      "passed": true,
+      "milliseconds": 324.04
+    },
+    {
+      "name": "Model strings render as text, never executable HTML",
+      "passed": true,
+      "milliseconds": 435.32
+    },
+    {
+      "name": "Light, dark and narrow responsive layouts",
+      "passed": true,
+      "milliseconds": 1779.06
+    },
+    {
+      "name": "Cancellable selection and edit-start events",
+      "passed": true,
+      "milliseconds": 493.28
+    },
+    {
+      "name": "Recycled template handlers target the new model, not the old row",
+      "passed": true,
+      "milliseconds": 509.04
+    },
+    {
+      "name": "Additional custom-element tag registration",
+      "passed": true,
+      "milliseconds": 10.77
+    },
+    {
+      "name": "No uncaught browser exceptions",
+      "passed": true,
+      "milliseconds": 3.91
+    }
+  ],
+  "benchmarks": {
+    "100k": {
+      "rows": 100000,
+      "columns": 5,
+      "realizedRows": 20,
+      "realizedCells": 100,
+      "jsRenderMedianMs": 9,
+      "jsRenderP95Ms": 16.799999999813735,
+      "twoRafMeanMs": 49.654444444443406,
+      "passes": 90
+    },
+    "million": {
+      "Rows": 1000000,
+      "RealizedRows": 20,
+      "RealizedCells": 100,
+      "FrameMilliseconds": 8.5,
+      "MeasuredRows": 0,
+      "TotalHeight": 32000000,
+      "CreatedElements": 156,
+      "ReusedElements": 19983,
+      "FirstRow": 999980,
+      "LastRow": 999999
+    },
+    "wide200": {
+      "Rows": 2000,
+      "RealizedRows": 25,
+      "RealizedCells": 275,
+      "FrameMilliseconds": 58.299999999813735,
+      "MeasuredRows": 0,
+      "TotalHeight": 64000,
+      "CreatedElements": 355,
+      "ReusedElements": 20284,
+      "FirstRow": 995,
+      "LastRow": 1019
+    }
+  },
+  "notExercised": [
+    "Firefox",
+    "WebKit",
+    "physical touch/stylus",
+    "screen reader software",
+    "native OS clipboard permissions",
+    "directory-picker permissions",
+    "live Wikimedia request",
+    "HTTP navigation in Chromium"
+  ]
+}

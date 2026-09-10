@@ -1,0 +1,218 @@
+
+> treedatagrid-web-workspace@0.1.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: IndexPath value semantics, hierarchy, slicing, hash, numeric indexer
+ok 1 - IndexPath value semantics, hierarchy, slicing, hash, numeric indexer
+  ---
+  duration_ms: 5.603421
+  type: 'test'
+  ...
+# Subtest: GridLength parsing validates input and preserves units
+ok 2 - GridLength parsing validates input and preserves units
+  ---
+  duration_ms: 0.971742
+  type: 'test'
+  ...
+# Subtest: ObservableList supports range, move, replace, batch, and unique columns
+ok 3 - ObservableList supports range, move, replace, batch, and unique columns
+  ---
+  duration_ms: 2.703728
+  type: 'test'
+  ...
+# Subtest: Nested selector dependencies reconnect and disposal stops notification
+ok 4 - Nested selector dependencies reconnect and disposal stops notification
+  ---
+  duration_ms: 2.079776
+  type: 'test'
+  ...
+# Subtest: Flat rows are lazy and sorted indexes are source indexes
+ok 5 - Flat rows are lazy and sorted indexes are source indexes
+  ---
+  duration_ms: 27.369195
+  type: 'test'
+  ...
+# Subtest: Custom ascending and descending comparisons and sorting opt-out
+ok 6 - Custom ascending and descending comparisons and sorting opt-out
+  ---
+  duration_ms: 0.976206
+  type: 'test'
+  ...
+# Subtest: Selection batch reads are deferred and notification coalesces
+ok 7 - Selection batch reads are deferred and notification coalesces
+  ---
+  duration_ms: 2.484933
+  type: 'test'
+  ...
+# Subtest: Selection follows insert, remove, replace, and move
+ok 8 - Selection follows insert, remove, replace, and move
+  ---
+  duration_ms: 2.703976
+  type: 'test'
+  ...
+# Subtest: Row ranges follow displayed sort order
+ok 9 - Row ranges follow displayed sort order
+  ---
+  duration_ms: 2.049028
+  type: 'test'
+  ...
+# Subtest: Cell ranges support negative lengths and hidden source-column indexes
+ok 10 - Cell ranges support negative lengths and hidden source-column indexes
+  ---
+  duration_ms: 14.300352
+  type: 'test'
+  ...
+# Subtest: Cell selection tracks column instance through reordering
+ok 11 - Cell selection tracks column instance through reordering
+  ---
+  duration_ms: 1.20715
+  type: 'test'
+  ...
+# Subtest: Explicit null selection stays disabled
+ok 12 - Explicit null selection stays disabled
+  ---
+  duration_ms: 0.332077
+  type: 'test'
+  ...
+# Subtest: Core values, read-only behavior, visitors and delegates
+ok 13 - Core values, read-only behavior, visitors and delegates
+  ---
+  duration_ms: 1.190629
+  type: 'test'
+  ...
+# Subtest: Hierarchy expansion events, bound nested state, and row index mapping
+ok 14 - Hierarchy expansion events, bound nested state, and row index mapping
+  ---
+  duration_ms: 4.828265
+  type: 'test'
+  ...
+# Subtest: Expansion can be canceled without mutating bound state
+ok 15 - Expansion can be canceled without mutating bound state
+  ---
+  duration_ms: 0.839058
+  type: 'test'
+  ...
+# Subtest: Hierarchy collection mutation preserves selected model paths
+ok 16 - Hierarchy collection mutation preserves selected model paths
+  ---
+  duration_ms: 1.635558
+  type: 'test'
+  ...
+# Subtest: Replacing child collections releases old subscriptions
+ok 17 - Replacing child collections releases old subscriptions
+  ---
+  duration_ms: 1.320474
+  type: 'test'
+  ...
+# Subtest: ExpandAll / CollapseAll and branch sorting
+ok 18 - ExpandAll / CollapseAll and branch sorting
+  ---
+  duration_ms: 3.013281
+  type: 'test'
+  ...
+# Subtest: Hierarchy rejects duplicate expander columns
+ok 19 - Hierarchy rejects duplicate expander columns
+  ---
+  duration_ms: 1.169375
+  type: 'test'
+  ...
+# Subtest: Filter projection preserves source items and model indexes
+ok 20 - Filter projection preserves source items and model indexes
+  ---
+  duration_ms: 1.489748
+  type: 'test'
+  ...
+# Subtest: Flat MoveRows preserves selection including duplicate object occurrences
+ok 21 - Flat MoveRows preserves selection including duplicate object occurrences
+  ---
+  duration_ms: 3.490148
+  type: 'test'
+  ...
+# Subtest: Hierarchy movement is cycle-safe and supports reparenting
+ok 22 - Hierarchy movement is cycle-safe and supports reparenting
+  ---
+  duration_ms: 2.664398
+  type: 'test'
+  ...
+# Subtest: MoveRows validates duplicates, sorted data, and unsupported copy before mutation
+ok 23 - MoveRows validates duplicates, sorted data, and unsupported copy before mutation
+  ---
+  duration_ms: 1.093878
+  type: 'test'
+  ...
+# Subtest: Async children load once and cancellation does not reopen a collapsed row
+ok 24 - Async children load once and cancellation does not reopen a collapsed row
+  ---
+  duration_ms: 54.284631
+  type: 'test'
+  ...
+# Subtest: Row height index agrees with a naive oracle after random updates
+ok 25 - Row height index agrees with a naive oracle after random updates
+  ---
+  duration_ms: 24.14613
+  type: 'test'
+  ...
+# Subtest: Column star layout honors min/max and view-local natural measurements
+ok 26 - Column star layout honors min/max and view-local natural measurements
+  ---
+  duration_ms: 2.017732
+  type: 'test'
+  ...
+# Subtest: 100,000 flat items do not materialize offscreen row objects
+ok 27 - 100,000 flat items do not materialize offscreen row objects
+  ---
+  duration_ms: 93.391824
+  type: 'test'
+  ...
+# Subtest: Disposal disconnects root and nested source subscriptions
+ok 28 - Disposal disconnects root and nested source subscriptions
+  ---
+  duration_ms: 1.221754
+  type: 'test'
+  ...
+# Subtest: Async-loaded children participate in model-path lookup and selection
+ok 29 - Async-loaded children participate in model-path lookup and selection
+  ---
+  duration_ms: 1.280951
+  type: 'test'
+  ...
+# Subtest: Large Reset remaps selected duplicate occurrences without quadratic scans
+ok 30 - Large Reset remaps selected duplicate occurrences without quadratic scans
+  ---
+  duration_ms: 912.066586
+  type: 'test'
+  ...
+# Subtest: Removed selection events contain the removed model, not its successor
+ok 31 - Removed selection events contain the removed model, not its successor
+  ---
+  duration_ms: 1.377373
+  type: 'test'
+  ...
+# Subtest: Removing a parent reports the selected descendant as deselected
+ok 32 - Removing a parent reports the selected descendant as deselected
+  ---
+  duration_ms: 2.372753
+  type: 'test'
+  ...
+# Subtest: Index shifts do not report surviving items as deselected and selected
+ok 33 - Index shifts do not report surviving items as deselected and selected
+  ---
+  duration_ms: 2.899328
+  type: 'test'
+  ...
+# Subtest: Collection changes inside selection batches preserve committed items until commit
+ok 34 - Collection changes inside selection batches preserve committed items until commit
+  ---
+  duration_ms: 1.675326
+  type: 'test'
+  ...
+1..34
+# tests 34
+# suites 0
+# pass 34
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1661.979139

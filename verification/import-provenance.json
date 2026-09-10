@@ -1,0 +1,12 @@
+{
+  "sourceArchiveSHA256": "1dfdca0fbd4dad2362991e6ff306cc8b6ad5d9f181e9412f60a8ff22cc96c46a",
+  "compressedSourceSHA256": "ced9c75fc760b56b6ee84499748233c271bf171bbb3e95cd0b55df44d248629d",
+  "sourceFiles": 62,
+  "generatedFiles": [
+    "dist/*.js",
+    "dist/TreeDataGridWeb.html",
+    "releases/*.tgz",
+    "verification/*.png"
+  ],
+  "workflowRun": "34531374935"
+}

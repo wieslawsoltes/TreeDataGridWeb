@@ -1,0 +1,38 @@
+{
+  "runtime": "v22.16.0",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "path": "/samples/core-demo/app.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "path": "/samples/core-demo/app.css",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "path": "/packages/core/index.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "path": "/packages/web/index.js",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "path": "/samples/minimal/index.html",
+      "status": 200,
+      "passed": true
+    }
+  ],
+  "notFoundStatus": 404,
+  "traversalStatus": 403,
+  "note": "Node HTTP transport only; not browser URL navigation."
+}

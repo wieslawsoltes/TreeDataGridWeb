@@ -1,0 +1,102 @@
+Built library (173,437 chars), showcase (213,914 chars), standalone (238,829 chars).
+RUN All ten showcase views bind Core Model directly and fit the viewport
+PASS All ten showcase views bind Core Model directly and fit the viewport 2.17
+RUN Pointer expansion writes nested model state and ARIA
+PASS Pointer expansion writes nested model state and ARIA 0.9
+RUN Pointer ranges, additive row selection, select all and Escape
+PASS Pointer ranges, additive row selection, select all and Escape 1.07
+RUN Rectangular cell selection follows source-column indexes
+PASS Rectangular cell selection follows source-column indexes 0.57
+RUN F2 editing, Enter commit, Escape cancel, undo and redo
+PASS F2 editing, Enter commit, Escape cancel, undo and redo 1.03
+RUN Numeric conversion and validation retain the editor on failure
+PASS Numeric conversion and validation retain the editor on failure 0.54
+RUN Arrow, Page, Ctrl+Home/End and type-to-search navigation
+PASS Arrow, Page, Ctrl+Home/End and type-to-search navigation 1.06
+RUN Three-state header sorting preserves model selection
+PASS Three-state header sorting preserves model selection 0.94
+RUN Column resize with actual pointer input
+PASS Column resize with actual pointer input 0.99
+RUN Native header drag reorders source columns
+PASS Native header drag reorders source columns 0.62
+RUN Context menu and live column visibility
+PASS Context menu and live column visibility 0.61
+RUN Templates initialize, update, edit and retain three-state checkboxes
+PASS Templates initialize, update, edit and retain three-state checkboxes 1.26
+RUN TSV round-tripping, transactional paste, undo and safe CSV output
+PASS TSV round-tripping, transactional paste, undo and safe CSV output 0.37
+RUN Observable add/remove, filtering and empty state
+PASS Observable add/remove, filtering and empty state 1.23
+RUN Variable-height distant scrolling remains contiguous and bounded
+PASS Variable-height distant scrolling remains contiguous and bounded 1.27
+RUN ResizeObserver tracks live content growth and shrinkage
+PASS ResizeObserver tracks live content growth and shrinkage 0.83
+RUN 100,000 rows: jump, tail reachability, bounded DOM and recycling
+PASS 100,000 rows: jump, tail reachability, bounded DOM and recycling 4.96
+RUN One million rows: scaled scrollbar reaches beyond CSS extent limits
+PASS One million rows: scaled scrollbar reaches beyond CSS extent limits 2.65
+RUN 200 columns: horizontal virtualization, pinned cells and header alignment
+PASS 200 columns: horizontal virtualization, pinned cells and header alignment 0.8
+RUN Shared source, direct row identity, independent widths and nested binding
+PASS Shared source, direct row identity, independent widths and nested binding 0.64
+RUN Detach suspends bindings; reattach resynchronizes without disposing the model
+PASS Detach suspends bindings; reattach resynchronizes without disposing the model 0.6
+RUN Native row drag moves an item between hierarchical groups
+PASS Native row drag moves an item between hierarchical groups 0.62
+RUN Auto width converges instead of feeding back stretched flex widths
+PASS Auto width converges instead of feeding back stretched flex widths 0.88
+RUN Serializable view-state save and restoration
+PASS Serializable view-state save and restoration 0.32
+RUN Model strings render as text, never executable HTML
+PASS Model strings render as text, never executable HTML 0.44
+RUN Light, dark and narrow responsive layouts
+PASS Light, dark and narrow responsive layouts 1.78
+RUN Cancellable selection and edit-start events
+PASS Cancellable selection and edit-start events 0.49
+RUN Recycled template handlers target the new model, not the old row
+PASS Recycled template handlers target the new model, not the old row 0.51
+RUN Additional custom-element tag registration
+PASS Additional custom-element tag registration 0.01
+RUN No uncaught browser exceptions
+PASS No uncaught browser exceptions 0.0
+{
+  "passed": 30,
+  "failed": 0,
+  "pageErrors": [],
+  "benchmarks": {
+    "100k": {
+      "rows": 100000,
+      "columns": 5,
+      "realizedRows": 20,
+      "realizedCells": 100,
+      "jsRenderMedianMs": 9,
+      "jsRenderP95Ms": 16.799999999813735,
+      "twoRafMeanMs": 49.654444444443406,
+      "passes": 90
+    },
+    "million": {
+      "Rows": 1000000,
+      "RealizedRows": 20,
+      "RealizedCells": 100,
+      "FrameMilliseconds": 8.5,
+      "MeasuredRows": 0,
+      "TotalHeight": 32000000,
+      "CreatedElements": 156,
+      "ReusedElements": 19983,
+      "FirstRow": 999980,
+      "LastRow": 999999
+    },
+    "wide200": {
+      "Rows": 2000,
+      "RealizedRows": 25,
+      "RealizedCells": 275,
+      "FrameMilliseconds": 58.299999999813735,
+      "MeasuredRows": 0,
+      "TotalHeight": 64000,
+      "CreatedElements": 355,
+      "ReusedElements": 20284,
+      "FirstRow": 995,
+      "LastRow": 1019
+    }
+  }
+}

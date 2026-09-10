@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TreeDataGrid · minimal Core integration</title>
+<style>
+  body { margin:32px; font:14px/1.6 system-ui,sans-serif; color:#24333e; background:#f4f7f8; }
+  main { max-width:1000px; margin:auto; }
+  h1 { margin-bottom:4px; font-size:24px; }
+  p { color:#637780; }
+  tree-data-grid { height:420px; border:1px solid #dce5e8; border-radius:8px; overflow:hidden; }
+  button { font:inherit; padding:6px 12px; margin:10px 6px 10px 0; }
+</style>
+<main>
+<h1>Core model → native web control</h1>
+<p>A small independent integration. Double-click a name to edit; click column headers to sort.</p>
+<button id="add">Add person</button><button id="grow">Toggle multiline content</button>
+<tree-data-grid id="grid" aria-label="Editable people" row-height="auto"></tree-data-grid>
+<p id="status" role="status"></p>
+<a href="../../index.html">Full Core showcase</a>
+</main>
+<script type="module">
+import {observable, ObservableList, FlatTreeDataGridSource, TextColumn, CheckBoxColumn} from '../../packages/core/index.js';
+import '../../packages/web/index.js';
+const people=new ObservableList([
+  observable({Name:'Alex Morgan',Team:'Product engineering',Active:true}),
+  observable({Name:'Maya Chen',Team:'Design systems',Active:true}),
+  observable({Name:'Oliver Reed',Team:'Developer tools',Active:false})
+]);
+const model=new FlatTreeDataGridSource(people);
+model.Columns.Add(new TextColumn('Name',p=>p.Name,(p,value)=>p.Name=value,'2*',{TextWrapping:true,AffectsRowHeight:true}));
+model.Columns.Add(new TextColumn('Team',p=>p.Team,'2*'));
+model.Columns.Add(new CheckBoxColumn('Active',p=>p.Active,(p,value)=>p.Active=value,90));
+model.RowSelection.SingleSelect=false;
+const grid=document.getElementById('grid');
+grid.Model=model; grid.CanUserResizeColumns=true;
+grid.SelectionChanged.Subscribe((_,e)=>document.getElementById('status').textContent=`${e.Selection.Count} selected`);
+let added=0;
+document.getElementById('add').onclick=()=>people.Add(observable({Name:`New person ${++added}`,Team:'New team',Active:true}));
+document.getElementById('grow').onclick=()=>people.Get(0).Name=people.Get(0).Name.includes('\n')?'Alex Morgan':'Alex Morgan\nProduct engineering\nA naturally taller row';
+// The application owns model; grid.Dispose() never disposes this shared source.
+window.addEventListener('pagehide',()=>{grid.Dispose();model.Dispose();},{once:true});
+</script>
+</html>

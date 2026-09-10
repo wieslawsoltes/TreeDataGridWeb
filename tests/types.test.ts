@@ -1,0 +1,22 @@
+import {observable,ObservableList,FlatTreeDataGridSource,HierarchicalTreeDataGridSource,TextColumn,CheckBoxColumn,TemplateColumn,HierarchicalExpanderColumn,IndexPath,CellIndex,TreeDataGridCellSelectionModel,ColumnOptions,GridLength,ListSortDirection,RowHeightIndex} from '../packages/core/index.js';
+import {TreeDataGrid,TreeDataGridPresentationOptions,TemplateCellColumn} from '../packages/web/index.js';
+interface Person{Name:string;Age:number;Active:boolean|null;Children:ObservableList<Person>;Expansion:{IsExpanded:boolean};}
+const person:Person=observable({Name:'Alex',Age:36,Active:true,Children:new ObservableList<Person>(),Expansion:{IsExpanded:false}});
+const items=new ObservableList<Person>([person]);
+const source=new HierarchicalTreeDataGridSource<Person>(items);
+source.Columns.Add(new HierarchicalExpanderColumn<Person>(new TextColumn<Person,string>('Name',p=>p.Name,(p,v)=>p.Name=v,'3*'),p=>p.Children,null,'Expansion.IsExpanded'));
+source.Columns.Add(new TextColumn<Person,number>('Age',p=>p.Age,'1*',{TextAlignment:'Right'}));
+source.Columns.Add(new CheckBoxColumn<Person>('Active',p=>p.Active,(p,v)=>p.Active=v,80,{IsThreeState:true}));
+source.Columns.Add(new TemplateColumn<Person>('Details','details','2*'));
+source.RowSelection!.SingleSelect=false;source.RowSelection!.Select(new IndexPath(0));
+source.ExpandCollapseRecursive(p=>p.Age>20);source.SortBy(source.Columns[0],ListSortDirection.Ascending);
+const view=new TreeDataGrid<Person>();
+const options=new TreeDataGridPresentationOptions<Person>();
+options.Columns.Add('details',column=>new TemplateCellColumn<Person>(column,{create:p=>document.createTextNode(p.Name),update:(element,p)=>element.textContent=p.Name}));
+view.PresentationOptions=options;view.Model=source;view.RowHeight=null;
+view.CellPrepared.Subscribe((sender,e)=>{console.log(e.Model.Name,e.ColumnIndex);});
+const selection=new TreeDataGridCellSelectionModel(source);selection.SingleSelect=false;selection.SetSelectedRange(new CellIndex(2,new IndexPath(0)),-2,1);source.Selection=selection;
+const row=view.FindDisplayedRowIndex(new IndexPath(0));view.ScrollIntoView(row,0);view.RestoreViewState(view.SaveViewState());
+const flat=new FlatTreeDataGridSource<Person>(items);flat.Columns.Add(new TextColumn<Person,string>('Name','Name',true,GridLength.Auto));
+const geometry=new RowHeightIndex(100_000,36);geometry.Set(42,65);geometry.IndexAt(geometry.Offset(42));
+const inferred:TreeDataGrid=document.createElement('tree-data-grid');inferred.Model=flat;

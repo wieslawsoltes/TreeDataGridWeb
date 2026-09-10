@@ -1,0 +1,25 @@
+import {performance} from 'node:perf_hooks';
+import os from 'node:os';
+import {writeFile,mkdir} from 'node:fs/promises';
+import {RowHeightIndex,FlatTreeDataGridSource,HierarchicalTreeDataGridSource,TextColumn,HierarchicalExpanderColumn,ListSortDirection,ObservableList} from '../packages/core/index.js';
+const timings=[];
+function measure(name,action){const start=performance.now(),value=action(),ms=performance.now()-start;timings.push({name,milliseconds:ms});return value;}
+const items=measure('Create 1,000,000 plain model objects',()=>Array.from({length:1000000},(_,i)=>({Id:i,Value:(i*7919)%1000000})));
+const source=measure('Initialize flat source, columns, row projection (1,000,000 items)',()=>{const s=new FlatTreeDataGridSource(items);s.Columns.Add(new TextColumn('Value',m=>m.Value));void s.Rows.Count;return s;});
+measure('Read 100 dispersed row models without allocating rows',()=>{for(let i=0;i<100;i++)source.Rows.GetModel(i*9973);});
+if(source.Rows.CachedRowCount!==0)throw new Error('Model-only reads allocated row wrappers.');
+measure('Realize 40 dispersed core rows',()=>{for(let i=0;i<40;i++)source.Rows.Get(i*19997);});
+const geometry=measure('Initialize 1,000,000-row height index',()=>new RowHeightIndex(1000000,36));
+let state=0x12345678,checksum=0;const random=()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state;};
+measure('100,000 variable-height updates',()=>{for(let i=0;i<100000;i++)geometry.Set(random()%1000000,24+random()%150);});
+measure('100,000 pixel-to-row + prefix-offset queries',()=>{for(let i=0;i<100000;i++)checksum+=geometry.Offset(geometry.IndexAt(random()%Math.floor(geometry.Total)));});
+const sortSource=new FlatTreeDataGridSource(items.slice(0,100000));sortSource.Columns.Add(new TextColumn('Value',m=>m.Value));
+measure('Stable numeric sort + inverse mapping (100,000 rows)',()=>{sortSource.SortBy(sortSource.Columns.Get(0),ListSortDirection.Ascending);void sortSource.Rows.Count;});
+for(let i=1;i<sortSource.Rows.Count;i++)if(sortSource.Rows.GetModel(i-1).Value>sortSource.Rows.GetModel(i).Value)throw new Error('Sort did not produce ascending rows.');
+const roots=Array.from({length:100},(_,g)=>({Name:`Group ${g}`,Children:Array.from({length:99},(_,i)=>({Name:`Item ${i}`,Children:[]}))}));
+const tree=new HierarchicalTreeDataGridSource(roots);tree.Columns.Add(new HierarchicalExpanderColumn(new TextColumn('Name',m=>m.Name),m=>m.Children));
+measure('Expand all 10,000 hierarchical rows',()=>tree.ExpandAll());
+if(tree.Rows.Count!==10000)throw new Error('Invalid expanded row count.');
+measure('Collapse all 10,000 hierarchical rows',()=>tree.CollapseAll());
+const report={runtime:process.version,platform:process.platform,architecture:process.arch,cpu:os.cpus()[0]?.model,method:'Single local run per operation; no cross-machine performance guarantee. Timings include synchronous work only.',timings,geometryBytes:geometry.Values.byteLength+geometry.Tree.byteLength,cachedFlatRows:source.Rows.CachedRowCount,checksum};
+await mkdir(new URL('../verification/',import.meta.url),{recursive:true});await writeFile(new URL('../verification/core-benchmark.json',import.meta.url),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));source.Dispose();sortSource.Dispose();tree.Dispose();

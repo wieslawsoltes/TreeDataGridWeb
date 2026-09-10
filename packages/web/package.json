@@ -1,0 +1,26 @@
+{
+  "name": "@treedatagrid/web",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js"
+    }
+  },
+  "license": "MIT",
+  "description": "TreeDataGrid virtualized native web component",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "src",
+    "LICENSE",
+    "README.md",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "dependencies": {
+    "@treedatagrid/core": "0.1.0"
+  }
+}
