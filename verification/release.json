@@ -19,5 +19,7 @@
     "dist/core-demo.bundle.js": "b729c5d82aaae5bad520372bb87259a6bb14442910c44789878372d4eee33751",
     "releases/treedatagrid-core-0.1.0.tgz": "641dd50fe7848415219724bde6bfc551426d0d5b433981fa5f5ad3f5404bc9db",
     "releases/treedatagrid-web-0.1.0.tgz": "751b00881e2bf7496885bc4eb54dc6ee18f6cc6f37f5a3199c0c8f9251edc19c"
-  }
+  },
+  "regeneratedBy": "https://github.com/wieslawsoltes/TreeDataGridWeb/actions/runs/34531374935",
+  "originalLocalVerification": "See docs/VERIFICATION.md; CI browser results and screenshots are regenerated in this run."
 }

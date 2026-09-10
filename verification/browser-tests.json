@@ -1,5 +1,5 @@
 {
-  "browser": "144.0.7559.96",
+  "browser": "152.0.7977.0",
   "transport": "Playwright set_content with generated standalone HTML; URL navigation is policy-blocked",
   "viewport": {
     "width": 1440,
@@ -12,152 +12,152 @@
     {
       "name": "All ten showcase views bind Core Model directly and fit the viewport",
       "passed": true,
-      "milliseconds": 2173.17
+      "milliseconds": 1673.21
     },
     {
       "name": "Pointer expansion writes nested model state and ARIA",
       "passed": true,
-      "milliseconds": 904.17
+      "milliseconds": 534.65
     },
     {
       "name": "Pointer ranges, additive row selection, select all and Escape",
       "passed": true,
-      "milliseconds": 1066.27
+      "milliseconds": 818.34
     },
     {
       "name": "Rectangular cell selection follows source-column indexes",
       "passed": true,
-      "milliseconds": 574.02
+      "milliseconds": 397.76
     },
     {
       "name": "F2 editing, Enter commit, Escape cancel, undo and redo",
       "passed": true,
-      "milliseconds": 1030.31
+      "milliseconds": 800.85
     },
     {
       "name": "Numeric conversion and validation retain the editor on failure",
       "passed": true,
-      "milliseconds": 544.08
+      "milliseconds": 450.94
     },
     {
       "name": "Arrow, Page, Ctrl+Home/End and type-to-search navigation",
       "passed": true,
-      "milliseconds": 1064.21
+      "milliseconds": 877.45
     },
     {
       "name": "Three-state header sorting preserves model selection",
       "passed": true,
-      "milliseconds": 941.78
+      "milliseconds": 700.22
     },
     {
       "name": "Column resize with actual pointer input",
       "passed": true,
-      "milliseconds": 990.35
+      "milliseconds": 428.16
     },
     {
       "name": "Native header drag reorders source columns",
       "passed": true,
-      "milliseconds": 617.9
+      "milliseconds": 490.41
     },
     {
       "name": "Context menu and live column visibility",
       "passed": true,
-      "milliseconds": 607.77
+      "milliseconds": 469.16
     },
     {
       "name": "Templates initialize, update, edit and retain three-state checkboxes",
       "passed": true,
-      "milliseconds": 1262.27
+      "milliseconds": 896.77
     },
     {
       "name": "TSV round-tripping, transactional paste, undo and safe CSV output",
       "passed": true,
-      "milliseconds": 367.74
+      "milliseconds": 296.56
     },
     {
       "name": "Observable add/remove, filtering and empty state",
       "passed": true,
-      "milliseconds": 1233.79
+      "milliseconds": 879.47
     },
     {
       "name": "Variable-height distant scrolling remains contiguous and bounded",
       "passed": true,
-      "milliseconds": 1268.65
+      "milliseconds": 1045.58
     },
     {
       "name": "ResizeObserver tracks live content growth and shrinkage",
       "passed": true,
-      "milliseconds": 826.49
+      "milliseconds": 780.48
     },
     {
       "name": "100,000 rows: jump, tail reachability, bounded DOM and recycling",
       "passed": true,
-      "milliseconds": 4955.27
+      "milliseconds": 3397.45
     },
     {
       "name": "One million rows: scaled scrollbar reaches beyond CSS extent limits",
       "passed": true,
-      "milliseconds": 2649.23
+      "milliseconds": 678.51
     },
     {
       "name": "200 columns: horizontal virtualization, pinned cells and header alignment",
       "passed": true,
-      "milliseconds": 796.35
+      "milliseconds": 282.11
     },
     {
       "name": "Shared source, direct row identity, independent widths and nested binding",
       "passed": true,
-      "milliseconds": 638.2
+      "milliseconds": 548.25
     },
     {
       "name": "Detach suspends bindings; reattach resynchronizes without disposing the model",
       "passed": true,
-      "milliseconds": 604.19
+      "milliseconds": 543.73
     },
     {
       "name": "Native row drag moves an item between hierarchical groups",
       "passed": true,
-      "milliseconds": 618.53
+      "milliseconds": 505.79
     },
     {
       "name": "Auto width converges instead of feeding back stretched flex widths",
       "passed": true,
-      "milliseconds": 881.26
+      "milliseconds": 849.03
     },
     {
       "name": "Serializable view-state save and restoration",
       "passed": true,
-      "milliseconds": 324.04
+      "milliseconds": 282.48
     },
     {
       "name": "Model strings render as text, never executable HTML",
       "passed": true,
-      "milliseconds": 435.32
+      "milliseconds": 405.15
     },
     {
       "name": "Light, dark and narrow responsive layouts",
       "passed": true,
-      "milliseconds": 1779.06
+      "milliseconds": 953.67
     },
     {
       "name": "Cancellable selection and edit-start events",
       "passed": true,
-      "milliseconds": 493.28
+      "milliseconds": 351.92
     },
     {
       "name": "Recycled template handlers target the new model, not the old row",
       "passed": true,
-      "milliseconds": 509.04
+      "milliseconds": 434.79
     },
     {
       "name": "Additional custom-element tag registration",
       "passed": true,
-      "milliseconds": 10.77
+      "milliseconds": 2.29
     },
     {
       "name": "No uncaught browser exceptions",
       "passed": true,
-      "milliseconds": 3.91
+      "milliseconds": 1.27
     }
   ],
   "benchmarks": {
@@ -166,19 +166,19 @@
       "columns": 5,
       "realizedRows": 20,
       "realizedCells": 100,
-      "jsRenderMedianMs": 9,
-      "jsRenderP95Ms": 16.799999999813735,
-      "twoRafMeanMs": 49.654444444443406,
+      "jsRenderMedianMs": 2.7999999999883585,
+      "jsRenderP95Ms": 3.7000000000116415,
+      "twoRafMeanMs": 33.060000000000095,
       "passes": 90
     },
     "million": {
       "Rows": 1000000,
       "RealizedRows": 20,
       "RealizedCells": 100,
-      "FrameMilliseconds": 8.5,
+      "FrameMilliseconds": 2.599999999991269,
       "MeasuredRows": 0,
       "TotalHeight": 32000000,
-      "CreatedElements": 156,
+      "CreatedElements": 150,
       "ReusedElements": 19983,
       "FirstRow": 999980,
       "LastRow": 999999
@@ -187,11 +187,11 @@
       "Rows": 2000,
       "RealizedRows": 25,
       "RealizedCells": 275,
-      "FrameMilliseconds": 58.299999999813735,
+      "FrameMilliseconds": 8.69999999999709,
       "MeasuredRows": 0,
       "TotalHeight": 64000,
-      "CreatedElements": 355,
-      "ReusedElements": 20284,
+      "CreatedElements": 352,
+      "ReusedElements": 20281,
       "FirstRow": 995,
       "LastRow": 1019
     }

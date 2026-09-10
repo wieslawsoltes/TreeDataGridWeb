@@ -1,49 +1,49 @@
 {
-  "runtime": "v22.16.0",
+  "runtime": "v22.23.2",
   "platform": "linux",
   "architecture": "x64",
-  "cpu": "Intel(R) Xeon(R) CPU E5-2673 v4 @ 2.30GHz",
+  "cpu": "AMD EPYC 9V74 80-Core Processor",
   "method": "Single local run per operation; no cross-machine performance guarantee. Timings include synchronous work only.",
   "timings": [
     {
       "name": "Create 1,000,000 plain model objects",
-      "milliseconds": 833.5061299999999
+      "milliseconds": 172.821943
     },
     {
       "name": "Initialize flat source, columns, row projection (1,000,000 items)",
-      "milliseconds": 2.830857000000151
+      "milliseconds": 1.1581649999999968
     },
     {
       "name": "Read 100 dispersed row models without allocating rows",
-      "milliseconds": 0.6059110000001056
+      "milliseconds": 0.2263409999999908
     },
     {
       "name": "Realize 40 dispersed core rows",
-      "milliseconds": 0.6473840000001019
+      "milliseconds": 0.13910000000001332
     },
     {
       "name": "Initialize 1,000,000-row height index",
-      "milliseconds": 93.99440300000015
+      "milliseconds": 6.274495000000002
     },
     {
       "name": "100,000 variable-height updates",
-      "milliseconds": 42.34881599999994
+      "milliseconds": 15.191541
     },
     {
       "name": "100,000 pixel-to-row + prefix-offset queries",
-      "milliseconds": 97.47676299999989
+      "milliseconds": 64.208405
     },
     {
       "name": "Stable numeric sort + inverse mapping (100,000 rows)",
-      "milliseconds": 188.50574700000016
+      "milliseconds": 61.17978099999999
     },
     {
       "name": "Expand all 10,000 hierarchical rows",
-      "milliseconds": 303.2481650000002
+      "milliseconds": 124.23915599999998
     },
     {
       "name": "Collapse all 10,000 hierarchical rows",
-      "milliseconds": 109.62516499999992
+      "milliseconds": 55.34645499999999
     }
   ],
   "geometryBytes": 16000008,

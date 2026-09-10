@@ -3,7 +3,7 @@
 > node scripts/check-http.mjs
 
 {
-  "runtime": "v22.16.0",
+  "runtime": "v22.23.2",
   "results": [
     {
       "path": "/",
