@@ -1,0 +1,108 @@
+name: Import verified TreeDataGrid project
+on:
+  push:
+    branches: [main]
+    paths: ['.bootstrap/**', '.github/workflows/import.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: treedatagrid-import
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Restore checksum-verified source files
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import {createHash} from 'node:crypto';
+          import {brotliDecompressSync} from 'node:zlib';
+          const parts = Array.from({length:8}, (_,i) => fs.readFileSync(`.bootstrap/part${String(i).padStart(2,'0')}.br`));
+          const data = Buffer.concat(parts);
+          const sha = createHash('sha256').update(data).digest('hex');
+          if (sha !== 'ced9c75fc760b56b6ee84499748233c271bf171bbb3e95cd0b55df44d248629d') throw new Error('Source payload checksum mismatch');
+          const files = JSON.parse(brotliDecompressSync(data).toString('utf8'));
+          if (Object.keys(files).length !== 62) throw new Error('Incorrect source-file count');
+          for (const [name, text] of Object.entries(files)) {
+            if (path.isAbsolute(name) || name.split('/').includes('..') || name.startsWith('.git/') || name.startsWith('.github/')) throw new Error('Unsafe source path');
+            fs.mkdirSync(path.dirname(name),{recursive:true});
+            fs.writeFileSync(name,text,'utf8');
+          }
+          for (const line of files.SHA256SUMS.trim().split('\n')) {
+            const [hash,name] = line.split('  ');
+            if (Object.hasOwn(files,name) && createHash('sha256').update(fs.readFileSync(name)).digest('hex') !== hash) throw new Error('Checksum mismatch: '+name);
+          }
+          fs.appendFileSync('.gitignore','!releases/*.tgz\n_site/\n');
+          fs.writeFileSync('.nojekyll','');
+          fs.writeFileSync('verification/import-provenance.json',JSON.stringify({sourceArchiveSHA256:'1dfdca0fbd4dad2362991e6ff306cc8b6ad5d9f181e9412f60a8ff22cc96c46a',compressedSourceSHA256:sha,sourceFiles:62,generatedFiles:['dist/*.js','dist/TreeDataGridWeb.html','releases/*.tgz','verification/*.png'],workflowRun:process.env.GITHUB_RUN_ID},null,2)+'\n');
+          console.log('Restored and verified all 62 original text files.');
+          NODE
+      - name: Build distributions and local npm packages
+        run: |
+          npm run build
+          mkdir -p releases
+          npm pack ./packages/core --pack-destination releases | tee verification/core-package.txt
+          npm pack ./packages/web --pack-destination releases | tee verification/web-package.txt
+      - name: Commit complete source and distributions
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .gitignore .nojekyll CHANGELOG.md LICENSE README.md SHA256SUMS THIRD_PARTY_NOTICES.md dist docs index.html package.json packages releases samples scripts tests tsconfig.json verification
+          git commit -m 'Import TreeDataGrid Web Core, reusable control, complete showcase and distributions'
+          git push origin HEAD:main
+      - name: Install test toolchains
+        run: |
+          npm install --global typescript@5.8.3
+          python -m pip install -r tests/requirements.txt
+          python -m playwright install --with-deps chromium
+      - name: Verify Core, types, HTTP transport and browser interactions
+        run: |
+          npm test | tee verification/core-tests.txt
+          npm run typecheck | tee verification/types.txt
+          npm run test:http | tee verification/http-tests.txt
+          python tests/browser.py | tee verification/browser-tests.txt
+          npm run bench | tee verification/core-benchmark.txt
+      - name: Record current artifact checksums
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const hash = p => createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+          const release = JSON.parse(fs.readFileSync('verification/release.json','utf8'));
+          for (const p of Object.keys(release.sha256)) release.sha256[p] = hash(p);
+          release.regeneratedBy = `https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
+          release.originalLocalVerification = 'See docs/VERIFICATION.md; CI browser results and screenshots are regenerated in this run.';
+          fs.writeFileSync('verification/release.json',JSON.stringify(release,null,2)+'\n');
+          const walk = p => fs.readdirSync(p,{withFileTypes:true}).flatMap(e => {
+            const n = p === '.' ? e.name : `${p}/${e.name}`;
+            if (n === '.git' || n === '.github' || n === '.bootstrap' || n === 'node_modules' || n.includes('__pycache__') || n === 'SHA256SUMS') return [];
+            return e.isDirectory() ? walk(n) : [n];
+          });
+          fs.writeFileSync('SHA256SUMS',walk('.').sort().map(p => `${hash(p)}  ${p}`).join('\n')+'\n');
+          NODE
+      - name: Commit successful verification and remove import payload
+        run: |
+          rm -rf .bootstrap
+          git add -A
+          git commit -m 'Record passing CI verification, screenshots and regenerated artifact checksums'
+          git push origin HEAD:main
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: treedatagrid-import-verification
+          path: verification/
