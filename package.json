@@ -20,7 +20,7 @@
     "prepack": "npm run build"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.12"
   },
   "license": "MIT",
   "description": "TreeDataGrid Core models and a virtualized native web component for JavaScript and TypeScript",

@@ -1,12 +1,11 @@
 # TreeDataGrid Web · 0.1.0
 
-[![CI](https://github.com/wieslawsoltes/TreeDataGridWeb/actions/workflows/pages.yml/badge.svg)](https://github.com/wieslawsoltes/TreeDataGridWeb/actions/workflows/pages.yml)
+[![CI](https://github.com/wieslawsoltes/TreeDataGridWeb/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/wieslawsoltes/TreeDataGridWeb/actions/workflows/pages.yml)
 [![npm version](https://img.shields.io/npm/v/@wieslawsoltes/treedatagridweb)](https://www.npmjs.com/package/@wieslawsoltes/treedatagridweb)
 [![npm downloads](https://img.shields.io/npm/dm/@wieslawsoltes/treedatagridweb)](https://www.npmjs.com/package/@wieslawsoltes/treedatagridweb)
 [![Release](https://img.shields.io/github/v/release/wieslawsoltes/TreeDataGridWeb)](https://github.com/wieslawsoltes/TreeDataGridWeb/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Live demo](https://img.shields.io/badge/demo-GitHub%20Pages-087f78)](https://wieslawsoltes.github.io/TreeDataGridWeb/)
-
 
 A working JavaScript port of the TreeDataGrid model/control architecture: a DOM-independent **Core** package and a reusable **`<tree-data-grid>`** browser control. The showcase uses **`grid.Model` and Core sources throughout**, not a legacy-source adapter.
 
@@ -14,7 +13,7 @@ The inspected upstream snapshot is `wieslawsoltes/TreeDataGrid@3ca47316d724e5e04
 
 ## Run the showcase
 
-From this directory, with Node 20 or newer:
+From this directory, with Node 22.12 or newer:
 
 ```sh
 npm start
@@ -90,7 +89,7 @@ npm install @wieslawsoltes/treedatagridweb
 
 For a bundled application, import Core from `@wieslawsoltes/treedatagridweb/core`
 and register the component with `import '@wieslawsoltes/treedatagridweb/web'`.
-The package root also exports the DOM-independent Core API. Both entry points
+The package root also exports the DOM-independent Core API. Node 22.12 or newer supports both ESM imports and synchronous CommonJS `require`. Both entry points
 share the same model constructors; `/web` requires a browser DOM. Styles are
 embedded automatically in the component's shadow root. `/styles.css` exposes
 those rules for custom presentation work; `/global` and `/standalone` expose the
