@@ -1,7 +1,7 @@
 {
-  "name": "treedatagrid-web-workspace",
+  "name": "@wieslawsoltes/treedatagridweb",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "type": "module",
   "workspaces": [
     "packages/core",
@@ -14,10 +14,79 @@
     "build": "node scripts/build.mjs",
     "bench": "node scripts/bench.mjs",
     "typecheck": "tsc -p tsconfig.json",
-    "test:http": "node scripts/check-http.mjs"
+    "test:http": "node scripts/check-http.mjs",
+    "check": "npm run build && npm test && npm run typecheck && npm run test:http",
+    "test:package": "node scripts/package-test.mjs",
+    "prepack": "npm run build"
   },
   "engines": {
     "node": ">=20"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "description": "TreeDataGrid Core models and a virtualized native web component for JavaScript and TypeScript",
+  "author": "Wies\u0142aw \u0160olt\u00e9s",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wieslawsoltes/TreeDataGridWeb.git"
+  },
+  "homepage": "https://wieslawsoltes.github.io/TreeDataGridWeb/",
+  "bugs": {
+    "url": "https://github.com/wieslawsoltes/TreeDataGridWeb/issues"
+  },
+  "main": "./packages/core/index.js",
+  "types": "./packages/core/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./packages/core/index.d.ts",
+      "import": "./packages/core/index.js",
+      "default": "./packages/core/index.js"
+    },
+    "./core": {
+      "types": "./packages/core/index.d.ts",
+      "import": "./packages/core/index.js",
+      "default": "./packages/core/index.js"
+    },
+    "./web": {
+      "types": "./packages/web/index.d.ts",
+      "import": "./packages/web/index.js",
+      "default": "./packages/web/index.js"
+    },
+    "./styles.css": "./dist/treedatagrid.css",
+    "./global": "./dist/treedatagrid.global.js",
+    "./standalone": "./dist/TreeDataGridWeb.html",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "packages/core",
+    "packages/web",
+    "dist",
+    "docs",
+    "samples/minimal",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": [
+    "./packages/web/index.js",
+    "./dist/treedatagrid.global.js",
+    "./dist/*.css"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "keywords": [
+    "treedatagrid",
+    "datagrid",
+    "tree",
+    "virtualization",
+    "web-components",
+    "typescript",
+    "dotnet"
+  ],
+  "devDependencies": {
+    "typescript": "5.8.3",
+    "playwright": "1.63.0"
+  }
 }

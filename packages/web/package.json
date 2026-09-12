@@ -22,5 +22,6 @@
   ],
   "dependencies": {
     "@treedatagrid/core": "0.1.0"
-  }
+  },
+  "private": true
 }

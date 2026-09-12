@@ -7,3 +7,5 @@ See the full source archive README and docs for integration, parity boundaries a
 This package has no browser dependency and can be imported in Node. Data sources and columns use the PascalCase Core API; `Model` binding is supplied by the companion web package.
 
 A substantial working port, not certified exhaustive Avalonia/.NET API parity. MIT; upstream notice retained in LICENSE.
+
+This directory is a private development workspace. Its sources are published in `@wieslawsoltes/treedatagridweb`; import `@wieslawsoltes/treedatagridweb/core` from that package.
