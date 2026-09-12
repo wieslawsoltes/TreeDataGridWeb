@@ -5,6 +5,7 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve,dirname,relative} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {gridStyles} from '../packages/web/src/styles.js';
 const root=resolve(fileURLToPath(new URL('..',import.meta.url)));
 const license=(await readFile(resolve(root,'LICENSE'),'utf8')).replace(/\*\//g,'* /');
 async function bundle(entries,tail=''){
@@ -32,6 +33,7 @@ Upstream: wieslawsoltes/TreeDataGrid@3ca47316d724e5e040ab0281a880e8df999b25fc
 See THIRD_PARTY_NOTICES.md for provenance. */\n(()=>{\n'use strict';\nconst modules={\n${[...modules].map(([id,code])=>JSON.stringify(id)+':'+code).join(',\n')}\n};\nconst cache=Object.create(null);function require(id){if(cache[id])return cache[id];const exports={};cache[id]=exports;if(!modules[id])throw new Error('Unknown bundled module: '+id);modules[id](exports,require);return exports;}\n${ids.map(id=>`require(${JSON.stringify(id)});`).join('\n')}\n${tail}\n})();\n`;
 }
 await mkdir(resolve(root,'dist'),{recursive:true});
+await writeFile(resolve(root,'dist/treedatagrid.css'),gridStyles);
 const library=await bundle(['packages/core/index.js','packages/web/index.js'],`globalThis.TreeDataGridCore=require('packages/core/index.js');globalThis.TreeDataGridWeb=require('packages/web/index.js');`);
 const app=await bundle(['samples/core-demo/app.js']);
 await writeFile(resolve(root,'dist/treedatagrid.global.js'),library);
