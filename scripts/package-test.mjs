@@ -37,8 +37,9 @@ assert(source.RowSelection instanceof core.TreeDataGridRowSelectionModel); sourc
   const cjs = `const assert=require('node:assert/strict'); const main=require('${pkg.name}'), core=require('${pkg.name}/core'); assert.equal(main.FlatTreeDataGridSource,core.FlatTreeDataGridSource); assert.equal(new core.ObservableList([1,2]).Count,2);`;
   await writeFile(join(consumer, 'consumer.cjs'), cjs); run(process.execPath, ['consumer.cjs'], consumer);
   await writeFile(join(consumer, 'consumer.ts'), `import {ObservableList, FlatTreeDataGridSource, TextColumn} from '${pkg.name}/core'; import type {TreeDataGrid} from '${pkg.name}/web'; interface Row {Name:string} const source = new FlatTreeDataGridSource<Row>(new ObservableList<Row>([{Name:'typed'}])); source.Columns.Add(new TextColumn<Row,string>('Name', x=>x.Name)); declare const grid:TreeDataGrid<Row>; grid.Model=source; source.Dispose();`);
+  await writeFile(join(consumer, 'consumer.cts'), `import core = require('${pkg.name}/core'); const items = new core.ObservableList<number>([1,2]); const source: core.FlatTreeDataGridSource<number> = new core.FlatTreeDataGridSource(items); source.Dispose();`);
   const require = createRequire(import.meta.url), tsc = require.resolve('typescript/bin/tsc');
-  run(process.execPath, [tsc, '--strict', '--noEmit', '--target', 'ES2022', '--module', 'NodeNext', '--moduleResolution', 'NodeNext', '--lib', 'ES2022,DOM', join(consumer, 'consumer.ts')], consumer);
+  run(process.execPath, [tsc, '--strict', '--noEmit', '--target', 'ES2022', '--module', 'NodeNext', '--moduleResolution', 'NodeNext', '--lib', 'ES2022,DOM', join(consumer, 'consumer.ts'), join(consumer, 'consumer.cts')], consumer);
   const css = await readFile(join(installed, 'dist/treedatagrid.css'), 'utf8'); assert(css.includes(':host') && css.includes('.viewport'));
   for (const path of ['LICENSE','THIRD_PARTY_NOTICES.md','packages/core/LICENSE','packages/web/LICENSE','dist/treedatagrid.global.js','dist/TreeDataGridWeb.html']) assert((await stat(join(installed,path))).size > 0, `${path} missing from package`);
   if (process.argv.includes('--browser')) {
