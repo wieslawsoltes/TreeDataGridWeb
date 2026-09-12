@@ -47,9 +47,9 @@ assert(source.RowSelection instanceof core.TreeDataGridRowSelectionModel); sourc
     await writeFile(join(consumer,'index.html'),html);
     server = createServer(async (request,response) => { try { const pathname=decodeURIComponent(new URL(request.url,'http://localhost').pathname); const file=resolve(consumer,'.'+(pathname==='/'?'/index.html':pathname)); if(!file.startsWith(consumer+'/'))throw Error('Invalid path'); response.setHeader('content-type',({'.html':'text/html','.js':'text/javascript','.css':'text/css'})[extname(file)]??'application/octet-stream'); response.end(await readFile(file)); } catch { response.statusCode=404;response.end(); } });
     await new Promise(resolve => server.listen(0,'127.0.0.1',resolve));
-    browser = await chromium.launch({headless:true,args:['--no-sandbox']}); const page=await browser.newPage(); const errors=[];page.on('pageerror',error=>errors.push(error.message));
+    browser = await chromium.launch({headless:true,args:['--no-sandbox'],...(process.env.CHROMIUM_EXECUTABLE ? {executablePath:process.env.CHROMIUM_EXECUTABLE} : {})}); const page=await browser.newPage(); const errors=[];page.on('pageerror',error=>errors.push(error.message));
     await page.goto(`http://127.0.0.1:${server.address().port}/`);await page.waitForFunction(()=>window.probe?.grid.Stats.RealizedRows===2);
-    assert(await page.evaluate(()=>{const {core,web,source,grid,items}=probe; if(!(grid instanceof web.TreeDataGrid)||grid.Model!==source||grid.Rows!==source.Rows||!(grid.RowSelection instanceof core.TreeDataGridRowSelectionModel))return false;items.Add(core.observable({Name:'Third'}));return source.Rows.Count===3;}));
+    assert(await page.evaluate(()=>{const {core,web,source,grid,items}=probe; if(!(grid instanceof web.TreeDataGrid)||grid.Model!==source||grid.Rows!==source.Rows||!(grid.Presentation.Layout instanceof core.ColumnLayout))return false;items.Add(core.observable({Name:'Third'}));return source.Rows.Count===3;}));
     await page.waitForFunction(()=>probe.grid.Stats.RealizedRows===3);
     assert(await page.evaluate(()=>probe.grid.shadowRoot.querySelector('style').textContent.includes('.viewport')));
     assert.equal(errors.length,0,errors.join('\n')); await page.evaluate(()=>{probe.grid.Dispose();probe.source.Dispose();});
