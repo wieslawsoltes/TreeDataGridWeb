@@ -1,0 +1,38 @@
+@page "/"
+@namespace TreeDataGridWeb.Blazor.Sample
+@using TreeDataGridWeb.Blazor
+@using Microsoft.AspNetCore.Components
+@using Microsoft.JSInterop
+<main>
+    <h1>TreeDataGridWeb + Blazor</h1>
+    <p>1,000 editable, sortable rows, backed by the native virtualized grid and hierarchical Core model.</p>
+    <button id="action" @onclick="Search" disabled="@(!_ready)">Find Item 42 and verify CSV</button>
+    <button id="toggle" @onclick="Toggle">@(_show ? "Unmount" : "Mount")</button>
+    @if (_show) { <TreeDataGrid TItem="Row" @ref="_grid" Items="_rows" Columns="_columns" ChildrenProperty="children" Ready="Initialize" Changed="OnChanged" /> }
+    <output id="status">@_status</output><output id="result">@_result</output>
+    <p>Native edit and selection notifications: @_events</p>
+</main>
+@code {
+    public sealed record Row(string Name, int Value, bool Enabled, Row[]? Children);
+    private readonly Row[] _rows = Enumerable.Range(0, 1000).Select(i => new Row($"Item {i}", i * 3, i % 2 == 0, i == 0 ? [new Row("Child", 7, true, null)] : null)).ToArray();
+    private readonly GridColumn[] _columns = [new("Name", "name", "2*", true), new("Value", "value", "*", true), new("Enabled", "enabled", "*", true, "checkbox")];
+    private TreeDataGrid<Row> _grid = default!;
+    private bool _show = true, _ready;
+    private int _events;
+    private string _status = "Loading", _result = "";
+    private async Task Initialize(IJSObjectReference control)
+    {
+        await using var model = await _grid.Module!.GetAsync<IJSObjectReference>(control, "Model");
+        await _grid.Module.CallVoidAsync(model, "ExpandAll");
+        _ready = true; _status = "Ready";
+    }
+    private async Task Search()
+    {
+        var row = await _grid.SearchAsync("Item 42");
+        var csv = await _grid.ExportCsvAsync();
+        if (row < 0 || !csv.Contains("Item 42")) throw new InvalidOperationException("Native search or CSV export failed.");
+        await _grid.ScrollIntoViewAsync(row); _result = "Passed";
+    }
+    private void OnChanged(BrowserEvent args) => _events++;
+    private void Toggle() { _show = !_show; _ready = false; _status = _show ? "Loading" : "Unmounted"; _result = ""; }
+}
