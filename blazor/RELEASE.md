@@ -1,10 +1,12 @@
-# TreeDataGridWeb.Blazor 0.2.0
+# TreeDataGridWeb.Blazor 0.2.1
 
-- Self-contained .NET 8/.NET 10 package with the actual Core/Web engine and styles.
-- Editable flat/hierarchical grids, typed item and selection callbacks, native edit DTOs and full collection streaming.
-- Razor display/edit cell factories integrated with native virtualization and explicit create/update/dispose lifetimes.
-- Native object/function references, safe literal application data, streamed JSON/binary interop and deterministic disposal.
-- Package-restored WebAssembly/Server samples validating native Razor callbacks, search/CSV, typed edits, non-root hosting and remounting.
-- Root README integration, build instructions and validation-gated NuGet/public-payload/release verification.
+Updates the pinned interop runtime to the tested Dockyard revision `1c895b7184451071e1c7131063249d2d9eb145b9`, without introducing a Dockyard runtime dependency.
 
-Native engine limitations remain applicable. Generic interop complements typed convenience APIs; this is not an exhaustive generated C# desktop-control port. Synchronous native callbacks execute in the browser, and virtualized template state must live in application models.
+- Preserve cyclic/deep native argument graphs and shared callback identity without mutating inputs.
+- Await concurrent native/module/subscription cleanup and asynchronous unsubscribe; continue cleanup after individual failures.
+- Preserve property, method and disposal access through native callable handles.
+- Honor initialization-wait cancellation without cancelling other callers; prevent disposed owners from starting late native work.
+- Add `CallFunctionJsonAsync<T>` for complete streamed callable results.
+- Run the expanded shared JavaScript and managed regression suites against actual .NET 8/.NET 10 package consumers.
+
+Typed flat/hierarchical grids, native virtualization, Razor display/edit cells, item/selection binding, CSV/search/view-state APIs and native compatibility contracts remain available. WebAssembly and Interactive Server samples are validated before NuGet publication, which verifies public package payloads before creating this release.
