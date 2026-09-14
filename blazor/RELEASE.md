@@ -1,12 +1,7 @@
-# TreeDataGridWeb.Blazor 0.2.1
+# TreeDataGridWeb.Blazor 0.2.2
 
-Updates the pinned interop runtime to the tested Dockyard revision `1c895b7184451071e1c7131063249d2d9eb145b9`, without introducing a Dockyard runtime dependency.
+Adopts the validated shared runtime from Dockyard commit c833be49d472583b6f56225862e0aa7d201c1da7, merged through Dockyard PR #5.
 
-- Preserve cyclic/deep native argument graphs and shared callback identity without mutating inputs.
-- Await concurrent native/module/subscription cleanup and asynchronous unsubscribe; continue cleanup after individual failures.
-- Preserve property, method and disposal access through native callable handles.
-- Honor initialization-wait cancellation without cancelling other callers; prevent disposed owners from starting late native work.
-- Add `CallFunctionJsonAsync<T>` for complete streamed callable results.
-- Run the expanded shared JavaScript and managed regression suites against actual .NET 8/.NET 10 package consumers.
+Fixes visual disposal concurrency, late template import/creation cleanup, queued callbacks after removal and repeated failed cleanup. Adds IsReady/IsDisposed, awaitable Razor factory teardown and coalesced template updates. Preserves typed grid editing, item/selection binding, virtualized Razor display/edit cells, native Core APIs, streams and all existing operations.
 
-Typed flat/hierarchical grids, native virtualization, Razor display/edit cells, item/selection binding, CSV/search/view-state APIs and native compatibility contracts remain available. WebAssembly and Interactive Server samples are validated before NuGet publication, which verifies public package payloads before creating this release.
+Both net8.0/net10.0 package consumers run managed lifecycle regressions and real WebAssembly/Interactive Server browser tests, including template movement/update/recreation. Eight new shared JavaScript lifecycle cases accompany existing native checks. Publication verifies the public NuGet payload before creating package, symbol and runnable-sample release artifacts. No runtime Dockyard/npm/CDN dependency is introduced; engine compatibility boundaries remain unchanged.
