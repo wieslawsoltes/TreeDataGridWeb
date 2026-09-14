@@ -1,21 +1,31 @@
 @page "/"
-@namespace TreeDataGridWeb.Blazor.Sample
+@namespace TreeDataGridWebBlazorSample
 @using TreeDataGridWeb.Blazor
 @using Microsoft.AspNetCore.Components
 @using Microsoft.JSInterop
-<main>
+<main data-native-template-test="true">
+    <BrowserTemplate TItem="Row" Id="@_templateId" Context="row">
+        <button class="native-template-check" @onclick='() => _templateResult = "Passed"'>@row.Name</button>
+    </BrowserTemplate>
+    <output id="native-template-result">@_templateResult</output>
     <h1>TreeDataGridWeb + Blazor</h1>
     <p>1,000 editable, sortable rows, backed by the native virtualized grid and hierarchical Core model.</p>
     <button id="action" @onclick="Search" disabled="@(!_ready)">Find Item 42 and verify CSV</button>
     <button id="toggle" @onclick="Toggle">@(_show ? "Unmount" : "Mount")</button>
-    @if (_show) { <TreeDataGrid TItem="Row" @ref="_grid" Items="_rows" Columns="_columns" ChildrenProperty="children" Ready="Initialize" Changed="OnChanged" /> }
+    @if (_show) { <TreeDataGrid TItem="Row" @ref="_grid" Items="_rows" ItemsChanged="OnItemsChanged" Columns="_columns" ChildrenProperty="children" Ready="Initialize" Changed="OnChanged" /> }
     <output id="status">@_status</output><output id="result">@_result</output>
     <p>Native edit and selection notifications: @_events</p>
+    <InteropProbe />
 </main>
 @code {
+    private readonly string _templateId = Guid.NewGuid().ToString("N");
+    private string _templateResult = "Waiting";
+    private TaskCompletionSource<int>? _itemsChanged;
+    protected override void OnInitialized() => _columns = [.. _columns, new("Razor", "name", "*", Template: BrowserFunction.RazorTemplate(_templateId))];
+    private void OnItemsChanged(Row[] rows) { _rows = rows; _itemsChanged?.TrySetResult(rows[1].Value); }
     public sealed record Row(string Name, int Value, bool Enabled, Row[]? Children);
-    private readonly Row[] _rows = Enumerable.Range(0, 1000).Select(i => new Row($"Item {i}", i * 3, i % 2 == 0, i == 0 ? [new Row("Child", 7, true, null)] : null)).ToArray();
-    private readonly GridColumn[] _columns = [new("Name", "name", "2*", true), new("Value", "value", "*", true), new("Enabled", "enabled", "*", true, "checkbox")];
+    private Row[] _rows = Enumerable.Range(0, 1000).Select(i => new Row($"Item {i}", i * 3, i % 2 == 0, i == 0 ? [new Row("Child", 7, true, null)] : null)).ToArray();
+    private GridColumn[] _columns = [new("Name", "name", "2*", true), new("Value", "value", "*", true), new("Enabled", "enabled", "*", true, "checkbox")];
     private TreeDataGrid<Row> _grid = default!;
     private bool _show = true, _ready;
     private int _events;
@@ -31,7 +41,11 @@
         var row = await _grid.SearchAsync("Item 42");
         var csv = await _grid.ExportCsvAsync();
         if (row < 0 || !csv.Contains("Item 42")) throw new InvalidOperationException("Native search or CSV export failed.");
-        await _grid.ScrollIntoViewAsync(row); _result = "Passed";
+        await _grid.ScrollIntoViewAsync(row);
+        _itemsChanged = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        await _grid.SetCellValueAsync("1", "value", 321);
+        if (await _itemsChanged.Task.WaitAsync(TimeSpan.FromSeconds(15)) != 321 || _rows[1].Value != 321) throw new InvalidOperationException("Native edit did not update typed C# items.");
+        _result = "Passed";
     }
     private void OnChanged(BrowserEvent args) => _events++;
     private void Toggle() { _show = !_show; _ready = false; _status = _show ? "Loading" : "Unmounted"; _result = ""; }

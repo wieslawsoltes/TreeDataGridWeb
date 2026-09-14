@@ -1,5 +1,10 @@
 # TreeDataGridWeb.Blazor 0.2.0
 
-Add a .NET 8 / .NET 10 virtualized TreeDataGrid component with typed columns, editable flat/hierarchical models, native selection events, scrolling, search, CSV, view state, and access to all native Core/Web exports. The self-contained NuGet package includes JavaScript, styles, documentation and licenses.
+- Self-contained .NET 8/.NET 10 package with the actual Core/Web engine and styles.
+- Editable flat/hierarchical grids, typed item and selection callbacks, native edit DTOs and full collection streaming.
+- Razor display/edit cell factories integrated with native virtualization and explicit create/update/dispose lifetimes.
+- Native object/function references, safe literal application data, streamed JSON/binary interop and deterministic disposal.
+- Package-restored WebAssembly/Server samples validating native Razor callbacks, search/CSV, typed edits, non-root hosting and remounting.
+- Root README integration, build instructions and validation-gated NuGet/public-payload/release verification.
 
-Includes functional WebAssembly and Interactive Server samples, actual-package browser tests and independently versioned NuGet publishing. Lifecycle source and validation are shared through an explicitly pinned source dependency. Native JavaScript factories support custom cell templates; Razor RenderFragment cell templates and synchronous .NET comparers are not supplied.
+Native engine limitations remain applicable. Generic interop complements typed convenience APIs; this is not an exhaustive generated C# desktop-control port. Synchronous native callbacks execute in the browser, and virtualized template state must live in application models.
