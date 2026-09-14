@@ -4,7 +4,7 @@ Core tree/grid models and virtualized native web components for JavaScript, Type
 
 [![npm](https://img.shields.io/npm/v/%40wieslawsoltes%2Ftreedatagridweb)](https://www.npmjs.com/package/@wieslawsoltes/treedatagridweb)
 [![npm downloads](https://img.shields.io/npm/dm/%40wieslawsoltes%2Ftreedatagridweb)](https://www.npmjs.com/package/@wieslawsoltes/treedatagridweb)
-[![NuGet](https://img.shields.io/nuget/v/TreeDataGridWeb.Blazor)](https://www.nuget.org/packages/TreeDataGridWeb.Blazor)
+[![TreeDataGridWeb.Blazor on NuGet](https://img.shields.io/nuget/v/TreeDataGridWeb.Blazor?label=TreeDataGridWeb.Blazor&logo=nuget)](https://www.nuget.org/packages/TreeDataGridWeb.Blazor)
 [![NuGet downloads](https://img.shields.io/nuget/dt/TreeDataGridWeb.Blazor)](https://www.nuget.org/packages/TreeDataGridWeb.Blazor)
 [![Blazor CI](https://github.com/wieslawsoltes/TreeDataGridWeb/actions/workflows/blazor.yml/badge.svg)](https://github.com/wieslawsoltes/TreeDataGridWeb/actions/workflows/blazor.yml)
 
