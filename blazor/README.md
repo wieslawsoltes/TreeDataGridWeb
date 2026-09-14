@@ -1,6 +1,6 @@
 # TreeDataGridWeb.Blazor
 
-Install `TreeDataGridWeb.Blazor` version `0.2.0`. The package targets .NET 8/.NET 10 and bundles the real Core/Web engine and styles as local static web assets for interactive WebAssembly and Server.
+Install `TreeDataGridWeb.Blazor` version `0.2.1`. The package targets .NET 8/.NET 10 and bundles the real Core/Web engine and styles as local static web assets for interactive WebAssembly and Server.
 
 ## Typed grid and binding
 

@@ -19,7 +19,7 @@ The [complete JavaScript guide](README.web.md) retains API examples, Core/Web ar
 ## Blazor
 
 ```sh
-dotnet add package TreeDataGridWeb.Blazor --version 0.2.0
+dotnet add package TreeDataGridWeb.Blazor --version 0.2.1
 ```
 
 The .NET 8/.NET 10 Razor class library supports interactive WebAssembly and Server, with locally packaged JavaScript and styles. It includes `TreeDataGrid<TItem>`, editable flat/hierarchical sources, typed item/selection callbacks, virtualized Razor cell factories, CSV, search and view-state persistence. No consumer npm/CDN dependency is required.
